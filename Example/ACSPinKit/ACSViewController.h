@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class ACSPinController;
+
+
 @interface ACSViewController : UIViewController
 
 @end

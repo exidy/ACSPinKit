@@ -1,0 +1,22 @@
+/* 
+  ACSPinKit_I18N.strings
+  PinTest
+
+  Created by Orlando Schäfer on 09/01/15.
+  Copyright (c) 2015 arconsis IT-Solutions GmbH. All rights reserved.
+*/
+
+"acspinkit.button.cancel.title" = "Abbrechen";
+"acspinkit.button.action.title" = "Menü";
+"acspinkit.button.delete.title" = "Löschen";
+
+"acspinkit.verify.header.text" = "Geben Sie Ihren Pincode ein:";
+"acspinkit.verify.alert.initial.text" = "Noch %ld Versuche.";
+"acspinkit.verify.alert.singular.text" = "Pincode falsch. Noch ein Versuch.";
+"acspinkit.verify.alert.plural.text" = "Pincode falsch. Noch %ld Versuche.";
+
+"acspinkit.change.header.text" = "Geben Sie Ihren aktuellen Pincode ein:";
+
+"acspinkit.create.header.initial.text" = "Geben Sie Ihren gewünschten Pincode ein:";
+"acspinkit.create.header.repeat.text" = "Pincode wiederholen:";
+"acspinkit.create.alert.text" = "Keine Übereinstimmung. Nochmal versuchen!";

@@ -7,40 +7,83 @@
 //
 
 #import "ACSAppDelegate.h"
+#import <ACSPinController.h>
+
+@interface ACSAppDelegate () <ACSPinControllerDelegate>
+
+@property (nonatomic) ACSPinController *pinController;
+@property (nonatomic, strong) UINavigationController *navController;
+
+@end
 
 @implementation ACSAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
+    
+    self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"logo"];
+    self.pinController.pinCustomizer.actionButtonImage = [UIImage imageNamed:@"icon_burger"];
+    UIColor *blueColor = [UIColor colorWithRed:0.3 green:0.49 blue:0.67 alpha:1];
+    self.pinController.pinCustomizer.keyboardTitleColor = blueColor;
+    self.pinController.pinCustomizer.headerTitleColor = blueColor;
+    self.pinController.pinCustomizer.passcodeDotsColor = blueColor;
     return YES;
 }
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    self.window.rootViewController = [self pincodeController];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
+- (UIViewController *)mainController
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    UIViewController *mainController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateInitialViewController];
+    return mainController;
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
+- (UIViewController *)pincodeController
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentation];
+    
+    
+    return pinController;
+}
+
+
+- (void)pinController:(UIViewController *)pinController didVerifyPin:(NSString *)pin
+{
+    [self showMainController];
+}
+
+- (void)pinControllerDidEnterWrongPin:(UIViewController *)pinController lastRetry:(BOOL)lastRetry
+{
+    
+}
+
+- (void)pinControllerCouldNotVerifyPin:(UIViewController *)pinController
+{
+    [self showMainController];
+}
+
+- (void)pinControllerDidSelectCustomActionButton:(UIViewController *)pinController
+{
+    NSLog(@"Custom action!");
+}
+
+- (void)showMainController
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.window duration:0.5 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+            self.window.rootViewController = [self mainController];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    });
 }
 
 @end

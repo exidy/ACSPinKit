@@ -1,0 +1,22 @@
+/* 
+  ACSPinKit_I18N.strings
+  PinTest
+
+  Created by Orlando Schäfer on 09/01/15.
+  Copyright (c) 2015 arconsis IT-Solutions GmbH. All rights reserved.
+*/
+
+"acspinkit.button.cancel.title" = "Cancel";
+"acspinkit.button.action.title" = "Menu";
+"acspinkit.button.delete.title" = "Delete";
+
+"acspinkit.verify.header.text" = "Enter your passcode:";
+"acspinkit.verify.alert.initial.text" = "%ld retries left.";
+"acspinkit.verify.alert.singular.text" = "Wrong passcode. One retry left.";
+"acspinkit.verify.alert.plural.text" = "Wrong passcode. %ld retries left.";
+
+"acspinkit.change.header.text" = "Enter your current passcode:";
+
+"acspinkit.create.header.initial.text" = "Enter your desired passcode:";
+"acspinkit.create.header.repeat.text" = "Repeat passcode:";
+"acspinkit.create.alert.text" = "Passcodes don't match. Try again!";

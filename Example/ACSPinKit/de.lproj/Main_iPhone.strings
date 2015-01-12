@@ -1,0 +1,21 @@
+
+/* Class = "IBUINavigationItem"; title = "ACSPinKit Example"; ObjectID = "6zl-qU-Ulh"; */
+"6zl-qU-Ulh.title" = "ACSPinKit Example";
+
+/* Class = "IBUIButton"; normalTitle = "Create PIN"; ObjectID = "8Is-og-LBx"; */
+"8Is-og-LBx.normalTitle" = "Create PIN";
+
+/* Class = "IBUIButton"; normalTitle = "Reset PIN"; ObjectID = "CzW-7H-8qE"; */
+"CzW-7H-8qE.normalTitle" = "Reset PIN";
+
+/* Class = "IBUILabel"; text = "For testing the fullscreen PIN verification just send this app to background and open it again... Don't forget to create a PIN before!"; ObjectID = "Pzq-hE-4uT"; */
+"Pzq-hE-4uT.text" = "For testing the fullscreen PIN verification just send this app to background and open it again... Don't forget to create a PIN before!";
+
+/* Class = "IBUIButton"; normalTitle = "Verify PIN"; ObjectID = "QDW-Um-TFx"; */
+"QDW-Um-TFx.normalTitle" = "Verify PIN";
+
+/* Class = "IBUIButton"; normalTitle = "Log stored PIN"; ObjectID = "jm5-dk-fQf"; */
+"jm5-dk-fQf.normalTitle" = "Log stored PIN";
+
+/* Class = "IBUIButton"; normalTitle = "Change PIN"; ObjectID = "l6I-xK-4yr"; */
+"l6I-xK-4yr.normalTitle" = "Change PIN";
