@@ -18,6 +18,6 @@
 - (void)pinControllerCouldNotVerifyPin:(UIViewController *)pinController;
 
 - (void)pinControllerDidSelectCancel:(UIViewController *)pinController;
-- (void)pinControllerDidSelectCustomActionButton:(UIViewController *)pinController;
+- (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton;
 
 @end

@@ -90,7 +90,7 @@
     [pinController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)pinControllerDidSelectCustomActionButton:(UIViewController *)pinController
+- (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton
 {
     NSLog(@"Custom action! Do something cool!");
 }

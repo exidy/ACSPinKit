@@ -62,8 +62,8 @@
 
 - (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didSelectActionButton:(UIButton *)actionButton
 {
-    if ([self.pinControllerDelegate respondsToSelector:@selector(pinControllerDidSelectCustomActionButton:)]) {
-        [self.pinControllerDelegate pinControllerDidSelectCustomActionButton:pinVerifyController];
+    if ([self.pinControllerDelegate respondsToSelector:@selector(pinController:didSelectCustomActionButton:)]) {
+        [self.pinControllerDelegate pinController:pinVerifyController didSelectCustomActionButton:actionButton];
     }
 }
 

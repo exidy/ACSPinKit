@@ -69,9 +69,9 @@
     [self showMainController];
 }
 
-- (void)pinControllerDidSelectCustomActionButton:(UIViewController *)pinController
+- (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton
 {
-    NSLog(@"Custom action!");
+    NSLog(@"Custom action! Do something cool!");
 }
 
 - (void)showMainController
