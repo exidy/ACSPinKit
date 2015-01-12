@@ -23,7 +23,7 @@
     
     self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
     
-    self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"logo"];
+    self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"arconsis_logo"];
     self.pinController.pinCustomizer.actionButtonImage = [UIImage imageNamed:@"icon_burger"];
     UIColor *blueColor = [UIColor colorWithRed:0.3 green:0.49 blue:0.67 alpha:1];
     self.pinController.pinCustomizer.keyboardTitleColor = blueColor;
