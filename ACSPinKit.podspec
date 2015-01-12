@@ -4,16 +4,13 @@ Pod::Spec.new do |s|
   s.version          = "0.1.0"
   s.summary          = "ACSPinKit is PIN/Passcode verification framework with focus on a good and modular architecture."
   s.description      = <<-DESC
-                       An optional longer description of ACSPinKit
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+						ACSPinKit is PIN/Passcode verification framework with focus on a good and modular architecture.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/ACSPinKit"
+  # s.homepage         = "https://github.com/<GITHUB_USERNAME>/ACSPinKit"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Orlando Schaefer" => "orlando.schaefer@arconsis.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/ACSPinKit.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://team.arconsis.com/git/ios-pin-kit", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/arconsis'
 
   s.platform     = :ios, '7.0'
