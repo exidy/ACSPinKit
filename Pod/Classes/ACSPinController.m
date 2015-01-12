@@ -90,6 +90,7 @@
 {
     UIViewController *pinController = [self verifyController];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pinController];
+    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [viewController presentViewController:navigationController animated:YES completion:nil];
 }
 
@@ -99,6 +100,7 @@
     
     UIViewController *pinController = [self changeController];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pinController];
+    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [viewController presentViewController:navigationController animated:YES completion:nil];
 }
 
@@ -106,6 +108,7 @@
 {
     UIViewController *pinController = [self createController];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pinController];
+    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [viewController presentViewController:navigationController animated:YES completion:nil];
 }
 
