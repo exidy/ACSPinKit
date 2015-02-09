@@ -19,6 +19,7 @@
 
         // Set defaults
         self.fallbackButtonTitle = nil;
+        self.reasonText = @"Authentication needed.";
         self.policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics;
 
     }
@@ -50,18 +51,26 @@
 
             if (authenticated) {
 
-                [self.delegate localAuthenticationAuthenticatedSuccessfully:self];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate localAuthenticationAuthenticatedSuccessfully:self];
+                });
 
 
             } else {
                 
-                [self.delegate localAuthentication:self failedWithError:error];
-                [self inspectError:error];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self.delegate localAuthentication:self failedWithError:error];
+                    [self inspectError:error];
+                });
             }
         }];
     } else {
-        [self.delegate localAuthentication:self failedWithError:authError];
-        [self inspectError:authError];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.delegate localAuthentication:self failedWithError:authError];
+            [self inspectError:authError];
+        });
     }
 }
 
