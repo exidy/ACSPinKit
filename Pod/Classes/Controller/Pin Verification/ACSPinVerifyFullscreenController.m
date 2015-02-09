@@ -83,15 +83,4 @@
     [self.containerView addConstraint:[NSLayoutConstraint constraintWithItem:self.keyboardController.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeHeight multiplier:0.7 constant:0.0]];
 
 }
-
-//- (BOOL)shouldAutorotate
-//{
-//    return NO;
-//}
-//
-//- (NSUInteger)supportedInterfaceOrientations
-//{
-//    return UIInterfaceOrientationMaskPortrait;
-//}
-
 @end

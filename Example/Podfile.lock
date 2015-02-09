@@ -1,5 +1,5 @@
 PODS:
-  - ACSPinKit (0.1.0)
+  - ACSPinKit (0.1.1)
   - Expecta (0.3.1)
   - Specta (0.2.1)
 
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ACSPinKit: da4611f1e635b2ff79286bca602988834e0fabc8
+  ACSPinKit: 116a33ee7e5a439814259ca28d5ec305ae4d7984
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
 
