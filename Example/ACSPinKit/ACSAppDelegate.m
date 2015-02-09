@@ -86,4 +86,17 @@
     });
 }
 
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    UIViewController *rootController = window.rootViewController;
+    
+    if ([rootController isKindOfClass:[UINavigationController class]]) {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+    else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+
+}
+
 @end
