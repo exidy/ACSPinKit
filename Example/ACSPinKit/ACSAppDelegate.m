@@ -19,37 +19,36 @@
 @implementation ACSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
     
     self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
     
+    // Customization
     self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"arconsis_logo"];
     self.pinController.pinCustomizer.actionButtonImage = [UIImage imageNamed:@"icon_burger"];
     UIColor *blueColor = [UIColor colorWithRed:0.3 green:0.49 blue:0.67 alpha:1];
     self.pinController.pinCustomizer.keyboardTitleColor = blueColor;
     self.pinController.pinCustomizer.headerTitleColor = blueColor;
     self.pinController.pinCustomizer.passcodeDotsColor = blueColor;
+    
     return YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
     self.window.rootViewController = [self pincodeController];
 }
 
 - (UIViewController *)mainController
 {
-    
     UIViewController *mainController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateInitialViewController];
     return mainController;
 }
 
 - (UIViewController *)pincodeController
 {
-    
-    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:YES];
-    
-    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:[userDefaults boolForKey:@"touchIDActive"]];
     return pinController;
 }
 

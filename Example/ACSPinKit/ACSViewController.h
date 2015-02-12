@@ -11,6 +11,6 @@
 @class ACSPinController;
 
 
-@interface ACSViewController : UIViewController
+@interface ACSViewController : UITableViewController
 
 @end

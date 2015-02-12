@@ -8,9 +8,11 @@
 
 #import "ACSViewController.h"
 #import <ACSPinKit/ACSPinController.h>
+#import <LocalAuthentication/LocalAuthentication.h>
 
 @interface ACSViewController () <ACSPinControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UISwitch *touchIDSwitch;
 @property (nonatomic, strong) ACSPinController *pinController;
 @end
 
@@ -23,11 +25,33 @@
     
     self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
     self.pinController.retriesMax = 5;
+    
+    [self.touchIDSwitch setOn:[self touchIDActive] animated:NO];
+    if (![self biometricsAuthenticationAvailable:nil]) {
+        [self.touchIDSwitch setOn:NO animated:NO];
+        [self setTouchIDActive:NO];
+        self.touchIDSwitch.enabled = NO;
+    }
 
     // Uncomment following lines for testing customization
 //    ACSPinCustomizer *customizer = self.pinController.pinCustomizer;
 //    customizer.displayBackgroundColor = [UIColor redColor];
     
+}
+
+#pragma mark - User defaults
+
+- (BOOL)touchIDActive
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:@"touchIDActive"];
+}
+
+- (void)setTouchIDActive:(BOOL)active
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:active forKey:@"touchIDActive"];
+    [userDefaults synchronize];
 }
 
 #pragma mark - Button actions
@@ -55,6 +79,10 @@
 - (IBAction)didSelectRemovePIN:(id)sender {
     
     [self.pinController resetPIN];
+}
+- (IBAction)didSelectTouchIDSwitch:(UISwitch *)sender {
+    
+    [self setTouchIDActive:sender.on];
 }
 
 #pragma mark - Pin controller delegate
@@ -93,6 +121,18 @@
 - (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton
 {
     NSLog(@"Custom action! Do something cool!");
+}
+
+#pragma mark - Bla
+
+- (BOOL)biometricsAuthenticationAvailable:(NSError **) error
+{
+    // Local authentication framework available? Just proceed when there is a class named 'LAContext'.
+    if ([NSClassFromString(@"LAContext") class]) {
+        LAContext *context = [[LAContext alloc] init];
+        return [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:error];
+    }
+    return NO;
 }
 
 @end
