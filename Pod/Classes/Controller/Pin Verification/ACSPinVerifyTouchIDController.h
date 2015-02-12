@@ -10,4 +10,6 @@
 
 @interface ACSPinVerifyTouchIDController : ACSPinVerifyFullscreenController <ACSLocalAuthenticationDelegate>
 
+@property (nonatomic) ACSLocalAuthentication *localAuthentication;
+
 @end

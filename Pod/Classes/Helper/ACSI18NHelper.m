@@ -20,6 +20,9 @@ NSString* const kACSCreateHeaderInitialText = @"acspinkit.create.header.initial.
 NSString* const kACSCreateHeaderRepeatText = @"acspinkit.create.header.repeat.text";
 NSString* const kACSCreateAlertText = @"acspinkit.create.alert.text";
 
+NSString* const kACSTouchIDReasonText = @"acspinkit.touchid.reason.text";
+NSString* const kACSTouchIDFallbackButtonTitle = @"acspinkit.touchid.button.fallback.title";
+
 @implementation ACSI18NHelper
 
 + (NSString *)i18nStringForKey:(NSString *)key {

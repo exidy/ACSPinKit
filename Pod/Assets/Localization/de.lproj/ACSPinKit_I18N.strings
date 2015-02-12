@@ -20,3 +20,6 @@
 "acspinkit.create.header.initial.text" = "Geben Sie Ihren gewünschten Pincode ein:";
 "acspinkit.create.header.repeat.text" = "Pincode wiederholen:";
 "acspinkit.create.alert.text" = "Keine Übereinstimmung. Nochmal versuchen!";
+
+"acspinkit.touchid.reason.text" = "Bitte authentifizieren Sie sich.";
+"acspinkit.touchid.button.fallback.title" = "Pincode eingeben";

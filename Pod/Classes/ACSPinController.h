@@ -23,7 +23,8 @@
 
 // Getting pin controllers for custom dismissal/actions on selection of a button
 - (UIViewController *)verifyControllerForCustomPresentation;
-- (UIViewController *)verifyControllerFullscreenForCustomPresentation;
+
+- (UIViewController *)verifyControllerFullscreenForCustomPresentationUsingTouchID:(BOOL)touchID;
 
 
 // PIN Controller presentation with auto dismissal

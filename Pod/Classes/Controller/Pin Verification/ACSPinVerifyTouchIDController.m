@@ -7,23 +7,14 @@
 #import "ACSLocalAuthentication.h"
 #import "ACSPinDisplay.h"
 
-@interface ACSPinVerifyTouchIDController()
-
-@property (nonatomic) ACSLocalAuthentication *localAuthentication;
-@end
 
 @implementation ACSPinVerifyTouchIDController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    NSError *error;
-
-    if ([ACSLocalAuthentication biometricsAuthenticationAvailable:&error]) {
-        self.localAuthentication = [[ACSLocalAuthentication alloc] init];
-
-        self.localAuthentication.delegate = self;
+    
+    if (self.localAuthentication) {
         [self.localAuthentication authenticate];
     }
 }

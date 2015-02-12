@@ -23,6 +23,9 @@ extern NSString* const kACSCreateHeaderInitialText;
 extern NSString* const kACSCreateHeaderRepeatText;
 extern NSString* const kACSCreateAlertText;
 
+extern NSString* const kACSTouchIDReasonText;
+extern NSString* const kACSTouchIDFallbackButtonTitle;
+
 
 @interface ACSI18NHelper : NSObject
 

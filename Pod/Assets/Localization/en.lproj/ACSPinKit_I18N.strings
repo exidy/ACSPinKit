@@ -20,3 +20,6 @@
 "acspinkit.create.header.initial.text" = "Enter your desired passcode:";
 "acspinkit.create.header.repeat.text" = "Repeat passcode:";
 "acspinkit.create.alert.text" = "Passcodes don't match. Try again!";
+
+"acspinkit.touchid.reason.text" = "Authentication needed.";
+"acspinkit.touchid.button.fallback.title" = "Enter Passcode";

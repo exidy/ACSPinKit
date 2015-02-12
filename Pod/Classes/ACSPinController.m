@@ -8,19 +8,23 @@
 
 #import "ACSPinController.h"
 
+// Controller
 #import "ACSPinChangeController.h"
 #import "ACSPinVerifyController.h"
 #import "ACSPinCreateController.h"
+#import "ACSPinVerifyTouchIDController.h"
+#import "ACSPinVerifyFullscreenController.h"
 
-#import "ACSKeychainHelper.h"
+#import "ACSPinKeyboardController.h"
+#import "ACSPinDisplayController.h"
 
+// Delegate Manager
 #import "ACSPinDelegateManager.h"
 #import "ACSPinChangeDelegateManager.h"
 #import "ACSPinCreateDelegateManager.h"
 #import "ACSPinVerifyDelegateManager.h"
-#import "ACSPinDisplayController.h"
-#import "ACSPinKeyboardController.h"
-#import "ACSPinVerifyFullscreenController.h"
+
+// Views
 #import "ACSPinNumberPadView.h"
 #import "ACSPinNumberPadCircleView.h"
 #import "ACSPinNumberButton.h"
@@ -28,7 +32,11 @@
 #import "ACSPinDisplayView.h"
 #import "ACSPinDisplayFullscreenView.h"
 
+// Helper
 #import "ACSI18NHelper.h"
+#import "ACSKeychainHelper.h"
+#import "ACSLocalAuthentication.h"
+
 
 @interface ACSPinController ()
 
@@ -78,11 +86,11 @@
     return pinController;
 }
 
-- (UIViewController *)verifyControllerFullscreenForCustomPresentation
+- (UIViewController *)verifyControllerFullscreenForCustomPresentationUsingTouchID:(BOOL)touchID
 {
     NSAssert([self storedPin].length > 0, @"ACSPinController: Verification not possible -> No stored PIN in keychain");
 
-    UIViewController *pinController = [self verifyControllerFullscreen];
+    UIViewController *pinController = touchID ? [self verifyControllerTouchID] : [self verifyControllerFullscreen];
     return pinController;
 }
 
@@ -131,9 +139,33 @@
 
 #pragma mark - Private (Setting up dependencies)
 
+- (ACSPinVerifyTouchIDController *)verifyControllerTouchID
+{
+    ACSPinVerifyTouchIDController *pinVerifyController = [[ACSPinVerifyTouchIDController alloc] init];
+    [self configureVerifyFullscreenController:pinVerifyController];
+
+    NSError *error;
+    if ([ACSLocalAuthentication biometricsAuthenticationAvailable:&error]) {
+        ACSLocalAuthentication *localAuthentication = [[ACSLocalAuthentication alloc] init];
+        localAuthentication.reasonText = self.pinCustomizer.touchIDReasonText;
+        localAuthentication.fallbackButtonTitle = self.pinCustomizer.touchIDFallbackTitle;
+        localAuthentication.delegate = pinVerifyController;
+        pinVerifyController.localAuthentication = localAuthentication;
+    }
+    
+    return pinVerifyController;
+}
+
 - (ACSPinVerifyFullscreenController *)verifyControllerFullscreen
 {
     ACSPinVerifyFullscreenController *pinVerifyController = [[ACSPinVerifyFullscreenController alloc] init];
+    [self configureVerifyFullscreenController:pinVerifyController];
+
+    return pinVerifyController;
+}
+
+- (void)configureVerifyFullscreenController:(ACSPinVerifyFullscreenController *)pinVerifyController
+{
     UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     actionButton.tintColor = self.pinCustomizer.headerTitleColor;
     if (self.pinCustomizer.actionButtonImage) {
@@ -144,7 +176,7 @@
     }
     pinVerifyController.actionButton = actionButton;
     pinVerifyController.headerString = ACSI18NString(kACSVerifyHeaderText);
-
+    
     // Set keyboard for pin verification
     ACSPinKeyboardController *keyboardController = [[ACSPinKeyboardController alloc] init];
     ACSPinNumberPadCircleView *keyboardView = [[ACSPinNumberPadCircleView alloc] initWithBackgroundColor:self.pinCustomizer.keyboardBackgroundColor
@@ -154,7 +186,7 @@
     keyboardController.keyboardDelegate = pinVerifyController;
     keyboardController.keyboardView = keyboardView;
     pinVerifyController.keyboardController = keyboardController;
-
+    
     // Set display for pin verification
     ACSPinDisplayController *displayController = [[ACSPinDisplayController alloc] init];
     ACSPinDisplayFullscreenView *displayView = [[ACSPinDisplayFullscreenView alloc] init];
@@ -165,10 +197,8 @@
     displayView.alertLabel.textColor = self.pinCustomizer.alertTextColor;
     displayController.displayView = displayView;
     pinVerifyController.displayController = displayController;
-
+    
     pinVerifyController.pinVerifyDelegate = self.pinDelegateManager.pinVerifyDelegateManager;
-
-    return pinVerifyController;
 }
 
 - (ACSPinVerifyController *)verifyController

@@ -37,6 +37,9 @@
     self.keyboardTintColor = [UIColor whiteColor];
     self.keyboardTitleColor = [UIColor darkGrayColor];
     self.keyboardHighlightColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    
+    self.touchIDReasonText = ACSI18NString(kACSTouchIDReasonText);
+    self.touchIDFallbackTitle = ACSI18NString(kACSTouchIDFallbackButtonTitle);
 }
 
 @end

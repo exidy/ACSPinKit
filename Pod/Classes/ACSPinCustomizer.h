@@ -25,5 +25,7 @@
 @property (nonatomic, strong) UIColor *keyboardTitleColor;
 @property (nonatomic, strong) UIColor *keyboardHighlightColor;
 
+@property (nonatomic, strong) NSString *touchIDReasonText;
+@property (nonatomic, strong) NSString *touchIDFallbackTitle;
 
 @end

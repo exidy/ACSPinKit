@@ -47,7 +47,7 @@
 - (UIViewController *)pincodeController
 {
     
-    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentation];
+    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:YES];
     
     
     return pinController;
