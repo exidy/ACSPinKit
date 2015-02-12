@@ -34,9 +34,14 @@
 
 - (void)addChildControllers
 {
+    [self addChildViewController:self.pinVerifyController];
     [self.view addSubview:self.pinVerifyController.view];
+    [self.pinVerifyController didMoveToParentViewController:self];
+
+    [self addChildViewController:self.pinCreateController];
     [self.view addSubview:self.pinCreateController.view];
-    
+    [self.pinCreateController didMoveToParentViewController:self];
+
     self.pinVerifyController.view.translatesAutoresizingMaskIntoConstraints = NO;
     self.pinCreateController.view.translatesAutoresizingMaskIntoConstraints = NO;
     

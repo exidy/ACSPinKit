@@ -45,13 +45,17 @@
 
 - (void)addChildControllers
 {
-    
+
+    [self addChildViewController:self.keyboardController];
     [self.view addSubview:self.keyboardController.view];
+    [self.keyboardController didMoveToParentViewController:self];
+
+    [self addChildViewController:self.displayController];
     [self.view addSubview:self.displayController.view];
-    
+    [self.displayController didMoveToParentViewController:self];
+
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[display]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"display":self.displayController.view}]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[keyboard]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"keyboard":self.keyboardController.view}]];
-    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][display][keyboard(==display)]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"top":self.topLayoutGuide, @"display":self.displayController.view, @"keyboard":self.keyboardController.view}]];
     
 }
