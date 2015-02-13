@@ -21,9 +21,11 @@
 // Init the PIN Controller with a service and username
 - (instancetype)initWithPinServiceName:(NSString *)pinServiceName andPinUserName:(NSString *)pinUserName delegate:(id <ACSPinControllerDelegate>)delegate;
 
+// Touch ID Availability
+- (BOOL)touchIDAvailable:(NSError **)error;
+
 // Getting pin controllers for custom dismissal/actions on selection of a button
 - (UIViewController *)verifyControllerForCustomPresentation;
-
 - (UIViewController *)verifyControllerFullscreenForCustomPresentationUsingTouchID:(BOOL)touchID;
 
 

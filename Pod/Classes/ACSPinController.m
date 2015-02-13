@@ -120,6 +120,11 @@
     [viewController presentViewController:navigationController animated:YES completion:nil];
 }
 
+- (BOOL)touchIDAvailable:(NSError **)error
+{
+    return [ACSLocalAuthentication biometricsAuthenticationAvailable:error];
+}
+
 - (NSString *)storedPin
 {
     return [self.pinDelegateManager storedPin];

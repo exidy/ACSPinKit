@@ -27,15 +27,11 @@
     self.pinController.retriesMax = 5;
     
     [self.touchIDSwitch setOn:[self touchIDActive] animated:NO];
-    if (![self biometricsAuthenticationAvailable:nil]) {
+    if (![self.pinController touchIDAvailable:NULL]) {
         [self.touchIDSwitch setOn:NO animated:NO];
         [self setTouchIDActive:NO];
         self.touchIDSwitch.enabled = NO;
     }
-
-    // Uncomment following lines for testing customization
-//    ACSPinCustomizer *customizer = self.pinController.pinCustomizer;
-//    customizer.displayBackgroundColor = [UIColor redColor];
     
 }
 
@@ -121,18 +117,6 @@
 - (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton
 {
     NSLog(@"Custom action! Do something cool!");
-}
-
-#pragma mark - Bla
-
-- (BOOL)biometricsAuthenticationAvailable:(NSError **) error
-{
-    // Local authentication framework available? Just proceed when there is a class named 'LAContext'.
-    if ([NSClassFromString(@"LAContext") class]) {
-        LAContext *context = [[LAContext alloc] init];
-        return [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:error];
-    }
-    return NO;
 }
 
 @end
