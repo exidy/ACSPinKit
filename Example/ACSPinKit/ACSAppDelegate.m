@@ -18,6 +18,8 @@
 
 @implementation ACSAppDelegate
 
+#pragma mark - Application Delegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     
@@ -39,39 +41,53 @@
     self.window.rootViewController = [self pincodeController];
 }
 
-- (UIViewController *)mainController
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    UIViewController *mainController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateInitialViewController];
-    return mainController;
+    UIViewController *rootController = window.rootViewController;
+    
+    if ([rootController isKindOfClass:[UINavigationController class]]) {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+    else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    
 }
 
-- (UIViewController *)pincodeController
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:[userDefaults boolForKey:@"touchIDActive"]];
-    return pinController;
-}
-
+#pragma mark - Pin controller delegate
 
 - (void)pinController:(UIViewController *)pinController didVerifyPin:(NSString *)pin
 {
+    NSLog(@"PIN verified!");
     [self showMainController];
 }
 
 - (void)pinControllerDidEnterWrongPin:(UIViewController *)pinController lastRetry:(BOOL)lastRetry
 {
+    NSLog(@"You entered a wrong PIN");
     
+    if (lastRetry) {
+        NSLog(@"This is your last retry!");
+    }
 }
 
 - (void)pinControllerCouldNotVerifyPin:(UIViewController *)pinController
 {
+    NSLog(@"Could not verify PIN. Now you should delete all data and logout an existent user...");
     [self showMainController];
+}
+
+- (void)pinControllerCouldNotVerifyTouchID:(UIViewController *)pinController withError:(NSError *)error
+{
+    NSLog(@"Touch ID failed");
 }
 
 - (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton
 {
     NSLog(@"Custom action! Do something cool!");
 }
+
+#pragma mark - Pin controller appearance at startup
 
 - (void)showMainController
 {
@@ -85,17 +101,18 @@
     });
 }
 
-- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+- (UIViewController *)mainController
 {
-    UIViewController *rootController = window.rootViewController;
-    
-    if ([rootController isKindOfClass:[UINavigationController class]]) {
-        return UIInterfaceOrientationMaskAllButUpsideDown;
-    }
-    else {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-
+    UIViewController *mainController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil] instantiateInitialViewController];
+    return mainController;
 }
+
+- (UIViewController *)pincodeController
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:[userDefaults boolForKey:@"touchIDActive"]];
+    return pinController;
+}
+
 
 @end

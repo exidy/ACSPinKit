@@ -43,6 +43,7 @@
     }
 }
 
+
 - (void)pinVerifyControllerCouldNotVerifyPIN:(ACSPinVerifyController *)pinVerifyController
 {
     [self.keychainHelper resetRetriesToGoCount];
@@ -51,6 +52,13 @@
     }
     [pinVerifyController dismissViewControllerAnimated:YES completion:nil];
 
+}
+
+- (void)pinVerifyControllerCouldNotVerifyTouchID:(ACSPinVerifyController *)pinVerifyController withError:(NSError *)error
+{
+    if ([self.pinControllerDelegate respondsToSelector:@selector(pinControllerCouldNotVerifyTouchID:withError:)]) {
+        [self.pinControllerDelegate pinControllerCouldNotVerifyTouchID:pinVerifyController withError:error];
+    }
 }
 
 - (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didSelectCancelButtonItem:(UIBarButtonItem *)cancelButtonItem

@@ -16,6 +16,7 @@
 - (void)pinController:(UIViewController *)pinController didVerifyPin:(NSString *)pin;
 - (void)pinControllerDidEnterWrongPin:(UIViewController *)pinController lastRetry:(BOOL)lastRetry;
 - (void)pinControllerCouldNotVerifyPin:(UIViewController *)pinController;
+- (void)pinControllerCouldNotVerifyTouchID:(UIViewController *)pinController withError:(NSError *)error;
 
 - (void)pinControllerDidSelectCancel:(UIViewController *)pinController;
 - (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton;

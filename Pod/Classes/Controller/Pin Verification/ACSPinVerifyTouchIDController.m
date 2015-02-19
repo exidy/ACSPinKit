@@ -37,7 +37,7 @@
 
 - (void)localAuthentication:(ACSLocalAuthentication *)localAuthentication failedWithError:(NSError *)error
 {
-    
+    [self.pinVerifyDelegate pinVerifyControllerCouldNotVerifyTouchID:self withError:error];
 }
 
 @end
