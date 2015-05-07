@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
     'ACSPinKitResources' => ['Pod/Assets/Localization/*.lproj']
   }
 
-  s.public_header_files = 'Pod/Classes/ACSPinController.h, Pod/Classes/ACSPinControllerDelegate.h, Pod/Classes/ACSPinCustomizer.h'
+  s.public_header_files = 'Pod/Classes/*.h'
 
 end
