@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ACSPinKit"
-  s.version          = "0.1.2"
+  s.version          = "0.2.0"
   s.summary          = "ACSPinKit is PIN/Passcode verification framework with focus on a good and modular architecture."
   s.description      = <<-DESC
 						ACSPinKit provides functionality for passcode creation, change and verification.
