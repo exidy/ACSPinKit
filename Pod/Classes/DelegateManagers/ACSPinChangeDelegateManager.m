@@ -11,9 +11,14 @@
 
 #pragma mark - Change Delegates
 
-- (NSString *)pinStringForPinChangeController:(ACSPinChangeController *)pinChangeController
+- (BOOL)pinValidForPinVerifyController:(ACSPinChangeController *)pinVerifyController forEnteredPin:(NSString *)pin
 {
-    return [self storedPin];
+    if (self.validationBlock) {
+        return self.validationBlock(pin);
+    }
+    else {
+        return [pin isEqualToString:[self storedPin]];
+    }
 }
 
 - (BOOL)alreadyHasRetriesForPinChangeController:(ACSPinChangeController *)pinChangeController
@@ -28,7 +33,9 @@
 
 - (void)pinChangeController:(ACSPinChangeController *)pinChangeController didChangePIN:(NSString *)pin
 {
-    [self.keychainHelper savePin:pin];
+    if (!self.validationBlock) {
+        [self.keychainHelper savePin:pin];
+    }
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinChangeController:didChangePin:)]) {
         [self.pinControllerDelegate pinChangeController:pinChangeController didChangePin:pin];
     }
@@ -36,7 +43,7 @@
     [pinChangeController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)pinChangeControllerDidVerifyOldPIN:(ACSPinChangeController *)pinChangeController
+- (void)pinChangeController:(ACSPinChangeController *)pinChangeController didVerifyOldPIN:(NSString *)pin
 {
     [self.keychainHelper resetRetriesToGoCount];
 }

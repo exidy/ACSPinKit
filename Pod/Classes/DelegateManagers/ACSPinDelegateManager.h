@@ -25,7 +25,10 @@
 @property (nonatomic, strong) ACSPinVerifyDelegateManager *pinVerifyDelegateManager;
 
 @property (nonatomic) NSUInteger retriesMax;
+@property (nonatomic, copy) BOOL (^validationBlock)(NSString *pin);
+
 - (NSString *)storedPin;
+- (BOOL)storePIN:(NSString *)pin;
 - (BOOL)resetPIN;
 
 @end

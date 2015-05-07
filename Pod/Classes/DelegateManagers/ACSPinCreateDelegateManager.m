@@ -12,7 +12,9 @@
 
 - (void)pinCreateController:(ACSPinCreateController *)pinCreateController didCreatePIN:(NSString *)pin
 {
-    [self.keychainHelper savePin:pin];
+    if (!self.validationBlock) {
+        [self.keychainHelper savePin:pin];
+    }
     [self.keychainHelper resetRetriesToGoCount];
 
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinCreateController:didCreatePin:)]) {

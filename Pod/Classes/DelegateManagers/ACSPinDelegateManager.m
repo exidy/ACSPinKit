@@ -18,6 +18,11 @@
     return [self.keychainHelper savedPin];
 }
 
+- (BOOL)storePIN:(NSString *)pin
+{
+    return [self.keychainHelper savePin:pin];
+}
+
 - (BOOL)resetPIN
 {
     return [self.keychainHelper resetPin];
@@ -27,6 +32,14 @@
 {
     _retriesMax = retriesMax;
     [self.keychainHelper saveRetriesMax:_retriesMax];
+}
+
+- (void)setValidationBlock:(BOOL (^)(NSString *))validationBlock
+{
+    _validationBlock = validationBlock;
+    _pinVerifyDelegateManager.validationBlock = _validationBlock;
+    _pinChangeDelegateManager.validationBlock = _validationBlock;
+    _pinCreateDelegateManager.validationBlock = _validationBlock;
 }
 
 - (void)setPinChangeDelegateManager:(ACSPinChangeDelegateManager *)pinChangeDelegateManager

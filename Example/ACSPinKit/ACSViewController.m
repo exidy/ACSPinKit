@@ -25,6 +25,9 @@
     
     self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
     self.pinController.retriesMax = 5;
+    self.pinController.validationBlock = ^BOOL(NSString *pin){
+        return [pin isEqualToString:@"6666"];
+    };
     
     [self.touchIDSwitch setOn:[self touchIDActive] animated:NO];
     if (![self.pinController touchIDAvailable:NULL]) {

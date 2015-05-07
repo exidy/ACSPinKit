@@ -80,7 +80,7 @@
 
 - (UIViewController *)verifyControllerForCustomPresentation
 {
-    NSAssert([self storedPin].length > 0, @"ACSPinController: Verification not possible -> No stored PIN in keychain");
+    NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Verification not possible -> You must create a pin first or provide a validation block");
     
     UIViewController *pinController = [self verifyController];
     return pinController;
@@ -88,14 +88,21 @@
 
 - (UIViewController *)verifyControllerFullscreenForCustomPresentationUsingTouchID:(BOOL)touchID
 {
-    NSAssert([self storedPin].length > 0, @"ACSPinController: Verification not possible -> No stored PIN in keychain");
-
+    if (touchID) {
+        NSAssert([self storedPin].length > 0, @"ACSPinController: Verification not possible -> No stored PIN in keychain");
+    }
+    else {
+        NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Verification not possible -> You must create a pin first or provide a validation block");
+    }
+    
     UIViewController *pinController = touchID ? [self verifyControllerTouchID] : [self verifyControllerFullscreen];
     return pinController;
 }
 
 - (void)presentVerifyControllerFromViewController:(UIViewController *)viewController
 {
+    NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Verification not possible -> You must create a pin first or provide a validation block");
+    
     UIViewController *pinController = [self verifyController];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pinController];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -104,7 +111,7 @@
 
 - (void)presentChangeControllerFromViewController:(UIViewController *)viewController
 {
-    NSAssert([self storedPin].length > 0, @"ACSPinController: Change PIN not possible -> No stored PIN in keychain");
+    NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Change pin not possible -> You must create a pin first or provide a validation block");
     
     UIViewController *pinController = [self changeController];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pinController];
@@ -120,6 +127,11 @@
     [viewController presentViewController:navigationController animated:YES completion:nil];
 }
 
+- (void)setValidationBlock:(BOOL (^)(NSString *))validationBlock
+{
+    _validationBlock = validationBlock;
+    self.pinDelegateManager.validationBlock = validationBlock;
+}
 - (BOOL)touchIDAvailable:(NSError **)error
 {
     return [ACSLocalAuthentication biometricsAuthenticationAvailable:error];
@@ -128,6 +140,11 @@
 - (NSString *)storedPin
 {
     return [self.pinDelegateManager storedPin];
+}
+
+- (BOOL)storePin:(NSString *)pin
+{
+    return [self.pinDelegateManager storePIN:pin];
 }
 
 - (BOOL)resetPIN

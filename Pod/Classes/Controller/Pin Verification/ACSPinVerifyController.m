@@ -81,15 +81,14 @@
 
 - (void)pinKeyboardController:(UIViewController <ACSPinKeyboard> *)pinKeyboardController didFinishEnteringText:(NSString *)textString
 {
-    NSString *storedPin = [self.pinVerifyDelegate pinStringForPinVerifyController:self];
+    BOOL valid = [self.pinVerifyDelegate pinValidForPinVerifyController:self forEnteredPin:textString];
     
-    if (![textString isEqualToString:storedPin]) {
-
+    if (!valid) {
         [self handleWrongPinEntering];
         return;
     }
 
-    [self.pinVerifyDelegate pinVerifyControllerDidVerifyPIN:self];
+    [self.pinVerifyDelegate pinVerifyController:self didVerifyPIN:textString];
 }
 
 - (void)pinKeyboardController:(UIViewController <ACSPinKeyboard> *)pinKeyboardController didResetText:(NSString *)textString

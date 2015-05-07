@@ -17,15 +17,17 @@
 @protocol ACSPinVerifyDelegate <NSObject>
 
 @required
-- (NSString *)pinStringForPinVerifyController:(ACSPinVerifyController *)pinVerifyController;
+- (BOOL)pinValidForPinVerifyController:(ACSPinVerifyController *)pinVerifyController forEnteredPin:(NSString *)pin;
+
 - (NSUInteger)retriesMaxForPinVerifyController:(ACSPinVerifyController *)pinVerifyController;
 - (BOOL)alreadyHasRetriesForPinVerifyController:(ACSPinVerifyController *)pinVerifyController;
 
-- (void)pinVerifyControllerDidVerifyPIN:(ACSPinVerifyController *)pinVerifyController;
+- (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didVerifyPIN:(NSString *)pin;
 - (void)pinVerifyControllerDidEnterWrongPIN:(ACSPinVerifyController *)pinVerifyController onlyOneRetryLeft:(BOOL)onlyOneRetryLeft;
 - (void)pinVerifyControllerCouldNotVerifyPIN:(ACSPinVerifyController *)pinVerifyController;
 
 @optional
+- (NSString *)pinStringForPinVerifyController:(ACSPinVerifyController *)pinVerifyController;
 - (void)pinVerifyControllerCouldNotVerifyTouchID:(ACSPinVerifyController *)pinVerifyController withError:(NSError *)error;
 - (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didSelectCancelButtonItem:(UIBarButtonItem *)cancelButtonItem;
 - (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didSelectActionButton:(UIButton *)actionButton;

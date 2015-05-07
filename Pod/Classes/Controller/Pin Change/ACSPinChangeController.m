@@ -53,9 +53,9 @@
     
 }
 
-- (NSString *)pinStringForPinVerifyController:(ACSPinVerifyController *)pinVerifyController
+- (BOOL)pinValidForPinVerifyController:(ACSPinVerifyController *)pinVerifyController forEnteredPin:(NSString *)pin
 {
-    return [self.pinChangeDelegate pinStringForPinChangeController:self];
+    return [self.pinChangeDelegate pinValidForPinVerifyController:self forEnteredPin:pin];
 }
 
 - (BOOL)alreadyHasRetriesForPinVerifyController:(ACSPinVerifyController *)pinVerifyController
@@ -68,12 +68,12 @@
     return [self.pinChangeDelegate retriesMaxForPinChangeController:self];
 }
 
-- (void)pinVerifyControllerDidVerifyPIN:(ACSPinVerifyController *)pinController
+- (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didVerifyPIN:(NSString *)pin
 {
     self.pinCreateController.view.hidden = NO;
     self.pinVerifyController.view.hidden = YES;
 
-    [self.pinChangeDelegate pinChangeControllerDidVerifyOldPIN:self];
+    [self.pinChangeDelegate pinChangeController:self didVerifyOldPIN:pin];
 }
 
 - (void)pinVerifyControllerDidEnterWrongPIN:(ACSPinVerifyController *)pinController onlyOneRetryLeft:(BOOL)onlyOneRetryLeft

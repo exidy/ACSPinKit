@@ -15,6 +15,16 @@
     return [self storedPin];
 }
 
+- (BOOL)pinValidForPinVerifyController:(ACSPinVerifyController *)pinVerifyController forEnteredPin:(NSString *)pin
+{
+    if (self.validationBlock) {
+        return self.validationBlock(pin);
+    }
+    else {
+        return [pin isEqualToString:[self storedPin]];
+    }
+}
+
 - (BOOL)alreadyHasRetriesForPinVerifyController:(ACSPinVerifyController *)pinVerifyController
 {
     return [self.keychainHelper retriesToGoCount] < [self.keychainHelper retriesMax];
@@ -25,11 +35,11 @@
     return [self.keychainHelper retriesToGoCount];
 }
 
-- (void)pinVerifyControllerDidVerifyPIN:(ACSPinVerifyController *)pinVerifyController
+- (void)pinVerifyController:(ACSPinVerifyController *)pinVerifyController didVerifyPIN:(NSString *)pin
 {
     [self.keychainHelper resetRetriesToGoCount];
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinController:didVerifyPin:)]) {
-        [self.pinControllerDelegate pinController:pinVerifyController didVerifyPin:[self storedPin]];
+        [self.pinControllerDelegate pinController:pinVerifyController didVerifyPin:pin];
     }
     [pinVerifyController dismissViewControllerAnimated:YES completion:nil];
 }

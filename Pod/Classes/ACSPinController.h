@@ -18,6 +18,10 @@
 // Settings for PIN Controller
 @property (nonatomic) NSUInteger retriesMax;
 
+// Validation block for checking pin entering without storing pin (eg. you can test if the typed in pin unlocks a vault and return
+// YES or NO. If this property is set, your pin will NOT be saved in the keychain.
+@property (nonatomic, copy) BOOL (^validationBlock)(NSString *pin);
+
 // Init the PIN Controller with a service and username
 - (instancetype)initWithPinServiceName:(NSString *)pinServiceName andPinUserName:(NSString *)pinUserName delegate:(id <ACSPinControllerDelegate>)delegate;
 
@@ -37,6 +41,7 @@
 
 // Get and reset the saved pin
 - (NSString *)storedPin;
+- (BOOL)storePin:(NSString *)pin;
 - (BOOL)resetPIN;
 
 @end

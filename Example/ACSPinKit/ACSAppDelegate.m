@@ -24,7 +24,9 @@
 
     
     self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
-    
+    self.pinController.validationBlock = ^BOOL(NSString *pin) {
+        return [pin isEqualToString:@"1111"];
+    };
     // Customization
     self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"arconsis_logo"];
     self.pinController.pinCustomizer.actionButtonImage = [UIImage imageNamed:@"icon_burger"];

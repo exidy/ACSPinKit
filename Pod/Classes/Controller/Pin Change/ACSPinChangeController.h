@@ -16,13 +16,14 @@
 @protocol ACSPinChangeDelegate <NSObject>
 
 @required
-- (NSString *)pinStringForPinChangeController:(ACSPinChangeController *)pinChangeController;
+- (BOOL)pinValidForPinVerifyController:(ACSPinChangeController *)pinVerifyController forEnteredPin:(NSString *)pin;
+
 - (NSUInteger)retriesMaxForPinChangeController:(ACSPinChangeController *)pinChangeController;
 - (BOOL)alreadyHasRetriesForPinChangeController:(ACSPinChangeController *)pinChangeController;
 
 - (void)pinChangeController:(ACSPinChangeController *)pinChangeController didChangePIN:(NSString *)pin;
 - (void)pinChangeControllerCouldNotVerifyOldPIN:(ACSPinChangeController *)pinChangeController;
-- (void)pinChangeControllerDidVerifyOldPIN:(ACSPinChangeController *)pinChangeController;
+- (void)pinChangeController:(ACSPinChangeController *)pinChangeController didVerifyOldPIN:(NSString *)pin;
 - (void)pinChangeControllerDidEnterWrongOldPIN:(ACSPinChangeController *)pinChangeController onlyOneRetryLeft:(BOOL)onlyOneRetryLeft;
 
 @optional
