@@ -2,7 +2,7 @@
   "name": "ACSPinKit",
   "version": "1.0",
   "summary": "ACSPinKit is PIN/Passcode verification framework with focus on a good and modular architecture.",
-  "description": "\t\t\t\t\t\tACSPinKit provides functionality for passcode creation, change and verification.\n\t\t\t\t\t\tThis framework was build with focus on clean and modular design.\n\t\t\t\t\t\tPlease give us feedback!\n",
+  "description": "ACSPinKit provides functionality for passcode creation, change and verification.\nThis framework was build with focus on clean and modular design.\nPlease give us feedback!",
   "homepage": "http://arconsis.com",
   "license": "MIT",
   "authors": {
