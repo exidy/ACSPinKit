@@ -76,7 +76,7 @@ NSString* const kACSTouchIDFallbackButtonTitle = @"acspinkit.touchid.button.fall
 
 + (NSBundle *)acsPinBundle {
 
-    NSString *mainBundlePath = [[NSBundle mainBundle] resourcePath];
+    NSString *mainBundlePath = [[NSBundle bundleForClass:[ACSI18NHelper class]] resourcePath];
     NSString *frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"ACSPinKitResources.bundle"];
     return [NSBundle bundleWithPath:frameworkBundlePath];
 }
