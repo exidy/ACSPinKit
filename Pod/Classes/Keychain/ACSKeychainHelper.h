@@ -10,7 +10,7 @@
 
 @interface ACSKeychainHelper : NSObject
 
-- (instancetype)initWithPinServiceName:(NSString *)pinServiceName andPinUserName:(NSString *)pinUserName;
+- (instancetype)initWithPinServiceName:(NSString *)pinServiceName pinUserName:(NSString *)pinUserName accessGroup:(NSString *)accessGroup;
 
 // PIN Management
 - (BOOL)savePin:(NSString *)pin;

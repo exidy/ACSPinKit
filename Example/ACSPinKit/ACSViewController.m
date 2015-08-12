@@ -8,7 +8,6 @@
 
 #import "ACSViewController.h"
 #import <ACSPinKit/ACSPinController.h>
-#import <LocalAuthentication/LocalAuthentication.h>
 
 @interface ACSViewController () <ACSPinControllerDelegate>
 
@@ -21,13 +20,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     
-    self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
+    self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" pinUserName:@"testuser" accessGroup:@"accesstest" delegate:self];
     self.pinController.retriesMax = 5;
-    self.pinController.validationBlock = ^BOOL(NSString *pin){
-        return [pin isEqualToString:@"6666"];
-    };
     
     [self.touchIDSwitch setOn:[self touchIDActive] animated:NO];
     if (![self.pinController touchIDAvailable:NULL]) {
@@ -89,11 +84,13 @@
 - (void)pinChangeController:(UIViewController *)pinChangeController didChangePin:(NSString *)pin
 {
     NSLog(@"Did change pin: %@", pin);
+    [[NSUserDefaults standardUserDefaults] setObject:pin forKey:@"PIN"];
 }
 
 - (void)pinCreateController:(UIViewController *)pinCreateController didCreatePin:(NSString *)pin
 {
     NSLog(@"Did create pin: %@", pin);
+    [[NSUserDefaults standardUserDefaults] setObject:pin forKey:@"PIN"];
 }
 
 - (void)pinController:(UIViewController *)pinController didVerifyPin:(NSString *)pin

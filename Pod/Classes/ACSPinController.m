@@ -42,14 +42,13 @@
 
 @property (nonatomic, strong) ACSPinDelegateManager *pinDelegateManager;
 
-
 @end
 
 @implementation ACSPinController
 
 #pragma mark - Public
 
-- (instancetype)initWithPinServiceName:(NSString *)pinServiceName andPinUserName:(NSString *)pinUserName delegate:(id <ACSPinControllerDelegate>)delegate
+- (instancetype)initWithPinServiceName:(NSString *)pinServiceName pinUserName:(NSString *)pinUserName accessGroup:(NSString *)accessGroup delegate:(id <ACSPinControllerDelegate>)delegate
 {
 
     self = [super init];
@@ -57,7 +56,7 @@
         NSAssert(pinServiceName.length > 0, @"ACSPinController initialization: Parameter 'pinServiceName' must not be nil!");
         NSAssert(pinUserName.length > 0, @"ACSPinController initialization: Parameter 'pinUserName' must not be nil!");
 
-        ACSKeychainHelper *keychainHelper = [[ACSKeychainHelper alloc] initWithPinServiceName:pinServiceName andPinUserName:pinUserName];
+        ACSKeychainHelper *keychainHelper = [[ACSKeychainHelper alloc] initWithPinServiceName:pinServiceName pinUserName:pinUserName accessGroup:@""];
         self.pinCustomizer = [[ACSPinCustomizer alloc] init];
         
         self.pinDelegateManager = [[ACSPinDelegateManager alloc] init];

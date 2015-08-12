@@ -7,14 +7,14 @@
 //
 
 #import "ACSKeychainHelper.h"
-#import "ACSKeychainUtils.h"
 #import "ACSPinFormatterHelper.h"
-
+#import <FDKeychain/FDKeychain.h>
 
 @interface ACSKeychainHelper ()
 
 @property (nonatomic, copy) NSString *pinServiceName;
 @property (nonatomic, copy) NSString *pinUserName;
+@property (nonatomic, copy) NSString *accessGroup;
 
 @property (nonatomic, copy) NSString *pinRetriesMaxName;
 @property (nonatomic, copy) NSString *pinRetriesCountName;
@@ -23,7 +23,7 @@
 
 @implementation ACSKeychainHelper
 
-- (instancetype)initWithPinServiceName:(NSString *)pinServiceName andPinUserName:(NSString *)pinUserName
+- (instancetype)initWithPinServiceName:(NSString *)pinServiceName pinUserName:(NSString *)pinUserName accessGroup:(NSString *)accessGroup;
 {
 
     self = [super init];
@@ -34,6 +34,7 @@
         
         self.pinServiceName = pinServiceName;
         self.pinUserName = pinUserName;
+        self.accessGroup = accessGroup;
         self.pinRetriesMaxName = [self.pinUserName stringByAppendingString:@"_pinRetriesMax"];
         self.pinRetriesCountName = [self.pinUserName stringByAppendingString:@"_pinRetriesCount"];
     }
@@ -45,30 +46,21 @@
 - (BOOL)savePin:(NSString *)pin
 {
     NSError *error;
-    [ACSKeychainUtils storeUsername:self.pinUserName
-                        andPassword:pin
-                     forServiceName:self.pinServiceName
-                     updateExisting:YES
-                              error:&error];
+    [FDKeychain saveItem:pin forKey:self.pinUserName forService:self.pinServiceName inAccessGroup:self.accessGroup withAccessibility:FDKeychainAccessibleWhenUnlocked error:&error];
     return error == nil;
 }
 
 - (BOOL)resetPin
 {
     NSError *error;
-    [ACSKeychainUtils deleteItemForUsername:self.pinUserName
-                             andServiceName:self.pinServiceName
-                                      error:&error];
+    [FDKeychain deleteItemForKey:self.pinUserName forService:self.pinServiceName inAccessGroup:self.accessGroup error:&error];
     return error == nil;
 }
 
 - (NSString *)savedPin
 {
     NSError *error;
-    NSString *pin = [ACSKeychainUtils getPasswordForUsername:self.pinUserName
-                                              andServiceName:self.pinServiceName
-                                                       error:&error];
-
+    NSString *pin = [FDKeychain itemForKey:self.pinUserName forService:self.pinServiceName inAccessGroup:self.accessGroup error:&error];
     return error ? nil : pin;
 }
 
@@ -78,33 +70,22 @@
 {
     NSString *retriesMaxString = [ACSPinFormatterHelper numberStringFromInteger:retriesMax];
     NSError *error;
-    [ACSKeychainUtils storeUsername:self.pinRetriesMaxName
-                        andPassword:retriesMaxString
-                     forServiceName:self.pinServiceName
-                     updateExisting:YES
-                              error:&error];
+    [FDKeychain saveItem:retriesMaxString forKey:self.pinRetriesMaxName forService:self.pinServiceName inAccessGroup:self.accessGroup withAccessibility:FDKeychainAccessibleWhenUnlocked error:&error];
     return error == nil;
 }
 
 - (NSUInteger)retriesMax
 {
     NSError *error = nil;
-    NSString *currentMaxString = [ACSKeychainUtils getPasswordForUsername:self.pinRetriesMaxName
-                                                           andServiceName:self.pinServiceName
-                                                                    error:&error];
-
-    
+    NSString *currentMaxString = [FDKeychain itemForKey:self.pinRetriesMaxName forService:self.pinServiceName inAccessGroup:self.accessGroup error:&error];
     return error ? NSNotFound : [ACSPinFormatterHelper integerFromNumberString:currentMaxString];
-
 }
 
 - (BOOL)incrementRetryCount
 {
     // Default value, if we don't have a current count, is 1.
     NSString *newCountString = @"1";
-    NSString *currentCountString = [ACSKeychainUtils getPasswordForUsername:self.pinRetriesCountName
-                                                             andServiceName:self.pinServiceName
-                                                                      error:nil];
+    NSString *currentCountString = [FDKeychain itemForKey:self.pinRetriesCountName forService:self.pinServiceName inAccessGroup:self.accessGroup error:nil];
     // If we have a current value, reset the default value
     if (currentCountString.length > 0) {
         NSUInteger currentCount = [ACSPinFormatterHelper integerFromNumberString:currentCountString];
@@ -114,22 +95,15 @@
 
     // Save the new count...
     NSError *error;
-    [ACSKeychainUtils storeUsername:self.pinRetriesCountName
-                        andPassword:newCountString
-                     forServiceName:self.pinServiceName
-                     updateExisting:YES
-                              error:&error];
+    [FDKeychain saveItem:newCountString forKey:self.pinRetriesCountName forService:self.pinServiceName inAccessGroup:self.accessGroup withAccessibility:FDKeychainAccessibleWhenUnlocked error:&error];
     return error == nil;
 }
 
 - (NSUInteger)retriesToGoCount
 {
-    NSString *currentCountString = [ACSKeychainUtils getPasswordForUsername:self.pinRetriesCountName
-                                                             andServiceName:self.pinServiceName
-                                                                      error:nil];
-    NSString *currentMaxString = [ACSKeychainUtils getPasswordForUsername:self.pinRetriesMaxName
-                                                           andServiceName:self.pinServiceName
-                                                                    error:nil];
+    NSString *currentCountString = [FDKeychain itemForKey:self.pinRetriesCountName forService:self.pinServiceName inAccessGroup:self.accessGroup error:nil];
+    NSString *currentMaxString = [FDKeychain itemForKey:self.pinRetriesMaxName forService:self.pinServiceName inAccessGroup:self.accessGroup error:nil];
+    
     if (!currentMaxString.length > 0) {
         NSException* noMaxException = [NSException exceptionWithName:@"ACSKeychainHelperException"
                                                               reason:@"No Retry max count saved"
@@ -145,17 +119,12 @@
     NSUInteger currentCount = [ACSPinFormatterHelper integerFromNumberString:currentCountString];
     
     return maxCount - currentCount;
-    
 }
 
 - (BOOL)resetRetriesToGoCount
 {
     NSError *error;
-    [ACSKeychainUtils storeUsername:self.pinRetriesCountName
-                        andPassword:@"0"
-                     forServiceName:self.pinServiceName
-                     updateExisting:YES
-                              error:&error];
+    [FDKeychain saveItem:@"0" forKey:self.pinRetriesCountName forService:self.pinServiceName inAccessGroup:self.accessGroup withAccessibility:FDKeychainAccessibleWhenUnlocked error:&error];
     return error == nil;
 }
 

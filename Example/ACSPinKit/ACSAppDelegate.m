@@ -23,10 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     
-    self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" andPinUserName:@"testuser" delegate:self];
-    self.pinController.validationBlock = ^BOOL(NSString *pin) {
-        return [pin isEqualToString:@"1111"];
-    };
+    self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" pinUserName:@"testuser" accessGroup:@"accesstest" delegate:self];
+
     // Customization
     self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"arconsis_logo"];
     self.pinController.pinCustomizer.actionButtonImage = [UIImage imageNamed:@"icon_burger"];
@@ -112,7 +110,8 @@
 - (UIViewController *)pincodeController
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:[userDefaults boolForKey:@"touchIDActive"]];
+    BOOL useTouchID = [userDefaults boolForKey:@"touchIDActive"] && [self.pinController storedPin] != nil;
+    UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:useTouchID];
     return pinController;
 }
 
