@@ -25,15 +25,16 @@ it, simply add the following line to your Podfile:
 - Customize titles, colors and images
 - Fullscreen verification controller
 - Very modular code design
+- iPhone and iPad Support
 
 ## Screenshots
 
 <br>
 <br>
 <p align="center" >
-	<img src="https://dl.dropboxusercontent.com/u/8901989/ACS1.png" width="30%" height="30%" alt="ACS" title="ACS">
-  <img src="https://dl.dropboxusercontent.com/u/8901989/ACS2.png" width="30%" height="30%" alt="ACS" title="ACS">
-  <img src="https://dl.dropboxusercontent.com/u/8901989/ACS3.png" width="30%" height="30%" alt="ACS" title="ACS">
+	<img src="https://dl.dropboxusercontent.com/u/8901989/ACS1.png" width="30%" height="30%" alt="ACS" title="ACS" border="1">
+  <img src="https://dl.dropboxusercontent.com/u/8901989/ACS2.png" width="30%" height="30%" alt="ACS" title="ACS" border="1">
+  <img src="https://dl.dropboxusercontent.com/u/8901989/ACS3.png" width="30%" height="30%" alt="ACS" title="ACS" border="1">
 </p>
 <br>
 <br>
