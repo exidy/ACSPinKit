@@ -9,10 +9,9 @@ Pod::Spec.new do |s|
 						Please give us feedback!
                        DESC
   s.homepage         = "http://arconsis.com"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "arconsis IT-Solutions GmbH" => "kontakt@arconsis.com" }
-  s.source           = { :git => "https://team.arconsis.com/git/ios-pin-kit", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/arconsis/ACSPinKit.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/arconsis'
 
   s.platform     = :ios, '7.0'
