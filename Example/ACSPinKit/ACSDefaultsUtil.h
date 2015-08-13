@@ -1,5 +1,5 @@
 //
-//  ACSViewController.h
+//  ACSDefaultsUtil.h
 //  Created by Orlando Schäfer
 //
 //
@@ -25,11 +25,24 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "ACSViewController.h"
 
-@class ACSPinController;
 
+/**
+ Just a helper class for this example to simulate pin storation you would usually do with vaults
+ or whatever.
+ */
+@interface ACSDefaultsUtil : NSObject
 
-@interface ACSViewController : UITableViewController
+- (BOOL)touchIDActive;
+
+- (void)setTouchIDActive:(BOOL)active;
+
+- (void)savePin:(NSString *)pin;
+
+- (NSString *)savedPin;
+
+- (void)removePin;
 
 @end

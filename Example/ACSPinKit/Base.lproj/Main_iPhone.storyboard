@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZfG-Qe-Zi1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZfG-Qe-Zi1">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -24,7 +24,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWf-GA-CuE">
-                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="28"/>
                                                     <state key="normal" title="Create PIN">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -47,7 +47,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdb-QO-TZO">
-                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="28"/>
                                                     <state key="normal" title="Change PIN">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -70,7 +70,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pY-UO-uGT">
-                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="28"/>
                                                     <state key="normal" title="Verify PIN">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -97,13 +97,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1n-xP-zgq">
-                                                    <rect key="frame" x="535" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="535" y="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="didSelectTouchIDSwitch:" destination="gwL-sj-FtO" eventType="valueChanged" id="0Vf-29-D49"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use TouchID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfT-ec-PTS">
-                                                    <rect key="frame" x="16" y="11.5" width="503" height="20.5"/>
+                                                    <rect key="frame" x="16" y="12" width="503" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -128,7 +128,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wV8-kq-x41">
-                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="28"/>
                                                     <state key="normal" title="Log stored PIN">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -151,7 +151,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFB-2l-fQT">
-                                                    <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="28"/>
                                                     <state key="normal" title="Reset PIN">
                                                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -179,7 +179,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="ACSPinKit Example" id="Z7L-y3-ru4"/>
                     <connections>
+                        <outlet property="changeButton" destination="tdb-QO-TZO" id="Epv-UP-xUV"/>
+                        <outlet property="createButton" destination="OWf-GA-CuE" id="xAJ-6M-yDT"/>
                         <outlet property="touchIDSwitch" destination="I1n-xP-zgq" id="FfQ-vj-xZO"/>
+                        <outlet property="verifyButton" destination="1pY-UO-uGT" id="9I6-VO-qCu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eqb-rb-yU3" userLabel="First Responder" sceneMemberID="firstResponder"/>

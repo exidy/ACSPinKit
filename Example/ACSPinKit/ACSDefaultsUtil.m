@@ -1,5 +1,5 @@
 //
-//  ACSViewController.h
+//  ACSDefaultsUtil.m
 //  Created by Orlando Schäfer
 //
 //
@@ -25,11 +25,41 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
-
-@class ACSPinController;
+#import "ACSDefaultsUtil.h"
 
 
-@interface ACSViewController : UITableViewController
+@implementation ACSDefaultsUtil
 
+- (BOOL)touchIDActive
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults boolForKey:@"touchIDActive"];
+}
+
+- (void)setTouchIDActive:(BOOL)active
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:active forKey:@"touchIDActive"];
+    [userDefaults synchronize];
+}
+
+- (void)savePin:(NSString *)pin
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:pin forKey:@"pin"];
+    [userDefaults synchronize];
+}
+
+- (NSString *)savedPin
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"pin"];
+}
+
+- (void)removePin
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:@"pin"];
+    [userDefaults synchronize];
+}
 @end

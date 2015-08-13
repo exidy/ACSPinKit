@@ -1,18 +1,38 @@
 //
 //  ACSAppDelegate.m
-//  ACSPinKit
+//  Created by Orlando Schäfer
 //
-//  Created by CocoaPods on 01/09/2015.
-//  Copyright (c) 2014 Orlando Schäfer. All rights reserved.
 //
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2015 arconsis IT-Solutions GmbH <contact@arconsis.com>
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 
 #import "ACSAppDelegate.h"
+#import "ACSDefaultsUtil.h"
 #import <ACSPinController.h>
 
 @interface ACSAppDelegate () <ACSPinControllerDelegate>
 
 @property (nonatomic) ACSPinController *pinController;
-@property (nonatomic, strong) UINavigationController *navController;
+@property (nonatomic) ACSDefaultsUtil *defaultsUtil;
 
 @end
 
@@ -22,8 +42,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    
+    self.defaultsUtil = [[ACSDefaultsUtil alloc] init];
+
     self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" pinUserName:@"testuser" accessGroup:@"accesstest" delegate:self];
+    self.pinController.retriesMax = 5;
+
+    // Validation block for pin controller to check if entered pin is valid. Only when not using touch id.
+    __weak ACSAppDelegate *weakSelf = self;
+    self.pinController.validationBlock = ^(NSString *pin) {
+        return [pin isEqualToString:weakSelf.defaultsUtil.savedPin];
+    };
 
     // Customization
     self.pinController.pinCustomizer.titleImage = [UIImage imageNamed:@"arconsis_logo"];
@@ -38,7 +66,9 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
-    self.window.rootViewController = [self pincodeController];
+    if (self.defaultsUtil.savedPin) {
+        self.window.rootViewController = [self pincodeController];
+    }
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
@@ -74,6 +104,8 @@
 - (void)pinControllerCouldNotVerifyPin:(UIViewController *)pinController
 {
     NSLog(@"Could not verify PIN. Now you should delete all data and logout an existent user...");
+    [self.pinController resetPIN];
+    [self.defaultsUtil removePin];
     [self showMainController];
 }
 
