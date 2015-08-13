@@ -24,6 +24,7 @@ it, simply add the following line to your Podfile:
 - Change pin code
 - Customize titles, colors and images
 - Fullscreen verification controller
+- Touch ID Support
 - Very modular code design
 - iPhone and iPad Support
 
@@ -41,7 +42,7 @@ it, simply add the following line to your Podfile:
 
 ## Getting started
 
-For getting started just initialize the pin controller with a given user, service and access group. All pin controller instances with these same values share the same pin handling.
+For getting started just initialize the pin controller with a given user, service and access group. All pin controller instances with these same values share the same pin 'domain'.
 
 ```objective-c
 	self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" pinUserName:@"testuser" accessGroup:@"accesstest" delegate:self];
@@ -52,10 +53,42 @@ For getting started just initialize the pin controller with a given user, servic
     };
 ```
 
-After you did setup the pin controller just present it from the current view controller:
+If you provide a `validationBlock` the pin controller does not store the created pin in the keychain. So then you have to store it manually (with the `storePin:` message).
+If you want to use Touch ID you have to ensure, that you pin is stored in the keychain.
+
+After you did setup the pin controller just perform one of the following use cases:
+
+### Create PIN
+
+```objective-c
+	[self.pinController presentCreateControllerFromViewController:self];
+```
+
+### Verify PIN
 
 ```objective-c
 	[self.pinController presentVerifyControllerFromViewController:self];
+```
+
+### Change PIN
+
+```objective-c
+	[self.pinController presentChangeControllerFromViewController:self];
+```
+
+### Verify PIN (Fullscreen style with circle buttons)
+
+```objective-c
+	UIViewController *pinController = [self.pinController verifyControllerFullscreenForCustomPresentationUsingTouchID:useTouchID];
+	// Present the pinController however you want - Maybe as rootViewController of the window?
+```
+
+The pin controller also provides a method for testing if Touch ID is available
+
+```objective-c
+	NSError *error = nil;
+	BOOL useTouchID = [self.pinController touchIDAvailable:&error]
+	// Present the pinController however you want - Maybe as rootViewController of the window?
 ```
 
 
