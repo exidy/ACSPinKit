@@ -61,13 +61,13 @@ After you did setup the pin controller just present it from the current view con
 
 ## Author
 
-arconsis IT-Solutions GmbH <kontakt@arconsis.com>
+arconsis IT-Solutions GmbH <contact@arconsis.com>
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 arconsis IT-Solutions GmbH <kontakt@arconsis.com>
+Copyright (c) 2015 arconsis IT-Solutions GmbH <contact@arconsis.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
