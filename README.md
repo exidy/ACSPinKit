@@ -4,9 +4,9 @@
   <img src="https://github.com/arconsis/ACSPinKit/raw/master/Resources/ACSPinKit.png">
 </p>
 
-## Usage
+## Try it out!
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, just type `pod try ACSPinKit`.
 
 ## Requirements
 - min. Target iOS 7
@@ -39,7 +39,7 @@ it, simply add the following line to your Podfile:
 <br>
 <br>
 
-## Usage
+## Getting started
 
 For getting started just initialize the pin controller with a given user, service and access group. All pin controller instances with these same values share the same pin handling.
 
