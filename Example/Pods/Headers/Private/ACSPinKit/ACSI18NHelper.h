@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Helper/ACSI18NHelper.h
+../../../ACSPinKit/Pod/Classes/Helper/ACSI18NHelper.h

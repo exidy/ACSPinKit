@@ -1,11 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'ACSPinKit', :exclusive => true do
-  pod "ACSPinKit", :path => "../"
+  pod "ACSPinKit"
 end
 
 target 'Tests', :exclusive => true do
-  pod "ACSPinKit", :path => "../"
+  pod "ACSPinKit"
 
   pod 'Specta', '~> 0.2.1'
   pod 'Expecta'

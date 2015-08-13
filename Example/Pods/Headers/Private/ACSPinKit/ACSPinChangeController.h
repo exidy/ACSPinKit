@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Controller/Pin Change/ACSPinChangeController.h
+../../../ACSPinKit/Pod/Classes/Controller/Pin Change/ACSPinChangeController.h

@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Controller/Display/ACSPinDisplayController.h
+../../../ACSPinKit/Pod/Classes/Controller/Display/ACSPinDisplayController.h

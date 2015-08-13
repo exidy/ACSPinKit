@@ -1,6 +1,6 @@
 {
   "name": "ACSPinKit",
-  "version": "1.0",
+  "version": "1.0.2",
   "summary": "ACSPinKit is PIN/Passcode verification framework with focus on a good and modular architecture.",
   "description": "ACSPinKit provides functionality for passcode creation, change and verification.\nThis framework was build with focus on clean and modular design.\nPlease give us feedback!",
   "homepage": "http://arconsis.com",
@@ -9,8 +9,8 @@
     "arconsis IT-Solutions GmbH": "kontakt@arconsis.com"
   },
   "source": {
-    "git": "https://team.arconsis.com/git/ios-pin-kit",
-    "tag": "1.0"
+    "git": "https://github.com/arconsis/ACSPinKit.git",
+    "tag": "1.0.2"
   },
   "social_media_url": "https://twitter.com/arconsis",
   "platforms": {

@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Helper/ACSPinAnimationHelper.h
+../../../ACSPinKit/Pod/Classes/Helper/ACSPinAnimationHelper.h

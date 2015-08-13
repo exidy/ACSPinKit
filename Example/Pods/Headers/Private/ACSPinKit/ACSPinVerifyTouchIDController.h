@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Controller/Pin Verification/ACSPinVerifyTouchIDController.h
+../../../ACSPinKit/Pod/Classes/Controller/Pin Verification/ACSPinVerifyTouchIDController.h

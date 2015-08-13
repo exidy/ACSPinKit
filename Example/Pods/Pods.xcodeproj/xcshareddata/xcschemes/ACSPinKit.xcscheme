@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "608602563914A1612EFFB5862EF3421D"
+               BlueprintIdentifier = "6B0B5D8835591F2D26372A8D"
                BuildableName = "libACSPinKit.a"
                BlueprintName = "ACSPinKit"
                ReferencedContainer = "container:Pods.xcodeproj">

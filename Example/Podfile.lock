@@ -1,21 +1,17 @@
 PODS:
-  - ACSPinKit (1.0):
+  - ACSPinKit (1.0.2):
     - FDKeychain (= 1.2.2)
   - Expecta (1.0.2)
   - FDKeychain (1.2.2)
   - Specta (0.2.1)
 
 DEPENDENCIES:
-  - ACSPinKit (from `../`)
+  - ACSPinKit
   - Expecta
   - Specta (~> 0.2.1)
 
-EXTERNAL SOURCES:
-  ACSPinKit:
-    :path: "../"
-
 SPEC CHECKSUMS:
-  ACSPinKit: 0244733f827656c47ff7478c4fa8c78024029e6d
+  ACSPinKit: 81da44fb6af6ff79584a08f6712e08aa7262d6ac
   Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
   FDKeychain: ce0d5e4fac972c28e921e893ffe982832695d17b
   Specta: 15a276a6343867b426d5ed135d5aa4d04123a573

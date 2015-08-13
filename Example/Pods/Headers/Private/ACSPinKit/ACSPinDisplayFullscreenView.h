@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Controller/Display/Views/ACSPinDisplayFullscreenView.h
+../../../ACSPinKit/Pod/Classes/Controller/Display/Views/ACSPinDisplayFullscreenView.h

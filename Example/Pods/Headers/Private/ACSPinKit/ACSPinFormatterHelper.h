@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/Helper/ACSPinFormatterHelper.h
+../../../ACSPinKit/Pod/Classes/Helper/ACSPinFormatterHelper.h

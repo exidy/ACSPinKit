@@ -1,1 +1,1 @@
-../../../../../Pod/Classes/DelegateManagers/ACSPinVerifyDelegateManager.h
+../../../ACSPinKit/Pod/Classes/DelegateManagers/ACSPinVerifyDelegateManager.h
