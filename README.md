@@ -42,7 +42,7 @@ it, simply add the following line to your Podfile:
 
 ## Getting started
 
-For getting started just initialize the pin controller with a given user, service and access group. All pin controller instances with these same values share the same pin 'domain'.
+For getting started just initialize the pin controller with a given user, service and access group. All pin controller instances with the same values share the same pin 'domain'.
 
 ```objective-c
 	self.pinController = [[ACSPinController alloc] initWithPinServiceName:@"testservice" pinUserName:@"testuser" accessGroup:@"accesstest" delegate:self];
@@ -53,8 +53,10 @@ For getting started just initialize the pin controller with a given user, servic
     };
 ```
 
+`retriesMax` indicate how often a user can attempt to verify the pin. All pin controller instances in the same pin 'domain' share this count. So we can ensure that the count gets decremented ... even if we use the same pin 'domain' in another app (via AppGroups and Keychain Access groups).
+
 If you provide a `validationBlock` the pin controller does not store the created pin in the keychain. So then you have to store it manually (with the `storePin:` message).
-If you want to use Touch ID you have to ensure, that you pin is stored in the keychain.
+If you want to use Touch ID you have to ensure, that your pin is stored in the keychain.
 
 After you did setup the pin controller just perform one of the following use cases:
 
@@ -91,6 +93,103 @@ The pin controller also provides a method for testing if Touch ID is available
 	// Present the pinController however you want - Maybe as rootViewController of the window?
 ```
 
+## Delegate Methods
+
+```objective-c
+/**
+This method is called after the pin code was changed successfully.
+*/
+- (void)pinChangeController:(UIViewController *)pinChangeController didChangePin:(NSString *)pin;
+/**
+ This method is called after the pin code was created successfully.
+*/
+- (void)pinCreateController:(UIViewController *)pinCreateController didCreatePin:(NSString *)pin;
+/**
+ This method is called after the pin code was verified successfully.
+*/
+- (void)pinController:(UIViewController *)pinController didVerifyPin:(NSString *)pin;
+/**
+ This method is called after the pin code was entered wrong. If there is only one retry left the lastRetry property is YES.
+*/
+- (void)pinControllerDidEnterWrongPin:(UIViewController *)pinController lastRetry:(BOOL)lastRetry;
+/**
+This method is called if the user reached the maximum number of attempts for entering the pin code. This means that the user could not
+be verified and you should react properly to that event (e.g. logout user)
+*/
+- (void)pinControllerCouldNotVerifyPin:(UIViewController *)pinController;
+/**
+This method is called after touch id verification failed. For the user it fallbacks to the normal pin entering mode.
+*/
+- (void)pinControllerCouldNotVerifyTouchID:(UIViewController *)pinController withError:(NSError *)error;
+/**
+This message is send if the user selects the cancel button. If you have presented the pin controller manually you have to dismiss it here again.
+*/
+- (void)pinControllerDidSelectCancel:(UIViewController *)pinController;
+/**
+If the user selects the custom action button. Do whatever you want (e.g. show a menu)
+*/
+- (void)pinController:(UIViewController *)pinController didSelectCustomActionButton:(UIButton *)actionButton;
+```
+
+## Customization
+
+Via `self.pinController.pinCustomizer` you can access the following properties.
+
+
+```objective-c
+/**
+ A property for providing a custom title image for the fullscreen controller (e.g. company logo)
+ */
+@property (nonatomic, strong) UIImage *titleImage;
+/**
+ A property for providing a custom action button image for the fullscreen controller (e.g. a burger button icon)
+ */
+@property (nonatomic, strong) UIImage *actionButtonImage;
+/**
+ A property for providing a custom action button title for the fullscreen controller (e.g. 'Menu')
+ */
+@property (nonatomic, strong) NSString *actionButtonString;
+/**
+ The background color of the display (upper part of controller)
+ */
+@property (nonatomic, strong) UIColor *displayBackgroundColor;
+/**
+ The color of the title text / prompt text
+ */
+@property (nonatomic, strong) UIColor *headerTitleColor;
+/**
+ The color of the placeholder dots of the passcode
+ */
+@property (nonatomic, strong) UIColor *passcodeDotsColor;
+/**
+ The color of the alert text that appear when entering a wrong pin
+ */
+@property (nonatomic, strong) UIColor *alertTextColor;
+/**
+ The background color of the keypad
+ */
+@property (nonatomic, strong) UIColor *keyboardBackgroundColor;
+/**
+ The color of the keypad buttons
+ */
+@property (nonatomic, strong) UIColor *keyboardTintColor;
+/**
+ The color of the keypad button titles
+ */
+@property (nonatomic, strong) UIColor *keyboardTitleColor;
+/**
+ The highlight color of the keypad buttons (when touching them)
+ */
+@property (nonatomic, strong) UIColor *keyboardHighlightColor;
+/**
+ The reason text that appear when using touch id.
+ */
+@property (nonatomic, strong) NSString *touchIDReasonText;
+/**
+ The fallback title of the button after touch id fails.
+ */
+@property (nonatomic, strong) NSString *touchIDFallbackTitle;
+```
 
 ## Author
 
