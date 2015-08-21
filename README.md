@@ -1,5 +1,3 @@
-# ACSPinKit
-
 <p align="center" >
   <img src="https://github.com/arconsis/ACSPinKit/raw/master/Resources/ACSPinKit.png">
 </p>
