@@ -38,7 +38,7 @@
 
         CGFloat radius = CGRectGetMidX(self.bounds);
         self.layer.cornerRadius = radius;
-        self.layer.borderWidth = 1;
+        self.layer.borderWidth = 1.5;
         self.layer.borderColor = self.titleColor.CGColor;
         self.clipsToBounds = YES;
     }

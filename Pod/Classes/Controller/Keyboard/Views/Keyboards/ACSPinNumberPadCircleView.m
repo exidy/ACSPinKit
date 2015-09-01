@@ -123,7 +123,7 @@
     [self removeConstraints:self.constraints];
 
     // Basic grid layout
-    NSString *layout1 = @"V:|[spacer1(>=1)][button1(>=40)][spacer2(==spacer1)][button4(==button1)][spacer3(==spacer1)][button7(==button1)][spacer4(==spacer1)][spacer22(==button1)][spacer5(==spacer1)]|";
+    NSString *layout1 = @"V:|[spacer1(>=1)][button1(==80)][spacer2(==spacer1)][button4(==button1)][spacer3(==spacer1)][button7(==button1)][spacer4(==spacer1)][spacer22(==button1)][spacer5(==spacer1)]|";
     NSString *layout2 = @"H:|[spacer6(>=1)][button1][spacer7(==spacer6)][button2(==button1)][spacer8(==spacer6)][button3(==button1)][spacer9(==spacer6)]|";
     NSString *layout3 = @"H:|[spacer10(==spacer6)][button4(==button1)][spacer11(==spacer6)][button5(==button1)][spacer12(==spacer6)][button6(==button1)][spacer13(==spacer6)]|";
     NSString *layout4 = @"H:|[spacer14(==spacer6)][button7(==button1)][spacer15(==spacer6)][button8(==button1)][spacer16(==spacer6)][button9(==button1)][spacer17(==spacer6)]|";
