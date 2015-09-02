@@ -49,6 +49,8 @@
                                                                      target:self
                                                                      action:@selector(didSelectCancelButtonItem:)];
     self.navigationItem.leftBarButtonItem = barButtonItem;
+    
+    self.navigationController.navigationBar.translucent = NO;
 
     [self addChildControllers];
     self.view.backgroundColor = self.displayController.view.backgroundColor;
