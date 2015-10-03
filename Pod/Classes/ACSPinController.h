@@ -98,6 +98,21 @@
  */
 - (UIViewController *)verifyControllerFullscreenForCustomPresentationUsingTouchID:(BOOL)touchID;
 
+/**
+ The controller used for changing the pin the user enters. You have to present and dismiss the controller manually.
+
+ @return The change controller.
+ */
+
+- (UIViewController *)changeControllerForCustomPresentation;
+
+/**
+ The controller used for creating a pin the user enters. You have to present and dismiss the controller manually.
+
+ @return The creation controller.
+ */
+
+- (UIViewController *)createControllerForCustomPresentation;
 
 /**
  Presents the verification controller from a provided view controller

@@ -117,6 +117,20 @@
     return pinController;
 }
 
+- (UIViewController *)changeControllerForCustomPresentation
+{
+    NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Change not possible -> You must create a pin first or provide a validation block");
+
+    UIViewController *pinController = [self changeController];
+    return pinController;
+}
+
+- (UIViewController *)createControllerForCustomPresentation
+{
+    UIViewController *pinController = [self createController];
+    return pinController;
+}
+
 - (void)presentVerifyControllerFromViewController:(UIViewController *)viewController
 {
     NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Verification not possible -> You must create a pin first or provide a validation block");
