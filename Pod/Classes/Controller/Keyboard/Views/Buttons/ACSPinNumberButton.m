@@ -50,7 +50,7 @@
 
     self.titleLabel.numberOfLines = 2;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.minimumScaleFactor = 0.5;
+    self.titleLabel.minimumScaleFactor = 0.3;
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
@@ -64,19 +64,19 @@
 
     self.titleLabel.numberOfLines = 1;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.minimumScaleFactor = 0.5;
+    self.titleLabel.minimumScaleFactor = 0.3;
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (NSDictionary *)attributesForTitle
 {
-    return @{NSFontAttributeName : [UIFont boldSystemFontOfSize:20],
+    return @{NSFontAttributeName : [UIFont systemFontOfSize:30],
             NSForegroundColorAttributeName : self.titleColor};
 }
 
 - (NSDictionary *)attributesForSubtitle
 {
-    return @{NSFontAttributeName : [UIFont systemFontOfSize:8],
+    return @{NSFontAttributeName : [UIFont systemFontOfSize:10],
             NSForegroundColorAttributeName : self.titleColor};
 }
 

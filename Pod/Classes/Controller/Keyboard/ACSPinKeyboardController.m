@@ -67,6 +67,17 @@
     [self.keyboardView.button9 setValue:@"9" withTitle:@"9" andSubtitle:@"W X Y Z"];
     [self.keyboardView.button0 setValue:@"0" withTitle:@"0"];
     [self.keyboardView.buttonDelete setValue:@"" withTitle:ACSI18NString(kACSButtonDeleteTitle)];
+
+    NSAttributedString *attributedTitleString = [self.keyboardView.buttonDelete attributedTitleForState:UIControlStateNormal];
+    NSMutableDictionary *mutableAttributes = [[attributedTitleString attributesAtIndex:0 effectiveRange:NULL] mutableCopy];
+    mutableAttributes[NSFontAttributeName] = [UIFont systemFontOfSize:20];
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:ACSI18NString(kACSButtonDeleteTitle) attributes:mutableAttributes];
+    [self.keyboardView.buttonDelete setAttributedTitle:titleString forState:UIControlStateNormal];
+
+    UIColor *highlightColor = mutableAttributes[NSForegroundColorAttributeName];
+    mutableAttributes[NSForegroundColorAttributeName] = [highlightColor colorWithAlphaComponent:0.5];
+    NSMutableAttributedString *highlightedTitleString = [[NSMutableAttributedString alloc] initWithString:ACSI18NString(kACSButtonDeleteTitle) attributes:mutableAttributes];
+    [self.keyboardView.buttonDelete setAttributedTitle:highlightedTitleString forState:UIControlStateHighlighted];
 }
 
 - (void)configureTargetActions
