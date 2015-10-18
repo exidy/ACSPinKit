@@ -107,7 +107,7 @@
 - (UIViewController *)verifyControllerFullscreenForCustomPresentationUsingTouchID:(BOOL)touchID
 {
     if (touchID) {
-        NSAssert([self storedPin].length > 0, @"ACSPinController: Verification not possible -> No stored PIN in keychain");
+        NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Verification not possible -> No stored PIN in keychain");
     }
     else {
         NSAssert([self storedPin].length > 0 || self.validationBlock, @"ACSPinController: Verification not possible -> You must create a pin first or provide a validation block");
