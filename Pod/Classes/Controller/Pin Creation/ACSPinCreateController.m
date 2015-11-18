@@ -49,7 +49,7 @@
                                                                      target:self
                                                                      action:@selector(didSelectCancelButtonItem:)];
     self.navigationItem.leftBarButtonItem = barButtonItem;
-    
+
     self.navigationController.navigationBar.translucent = NO;
 
     [self addChildControllers];
@@ -78,7 +78,7 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[display]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"display":self.displayController.view}]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[keyboard]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"keyboard":self.keyboardController.view}]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][display][keyboard(==display)]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"top":self.topLayoutGuide, @"display":self.displayController.view, @"keyboard":self.keyboardController.view}]];
-    
+
 }
 
 
@@ -95,6 +95,7 @@
 
     // First entering of PIN...
     if (!self.isRepeating) {
+        [self checkForWeakPin:textString];
         [self setupForRepeatingPinWithEnteredPin:textString];
     }
     // Repeating PIN case...validate if its the same PIN again!
@@ -133,5 +134,30 @@
     [self.displayController animateForRepetitionWithHeaderString:ACSI18NString(kACSCreateHeaderRepeatText) withCompletion:nil];
 }
 
+- (void)checkForWeakPin:(NSString *)pin
+{
+    NSArray *weakPins = @[@"0000",@"1111",@"2222",@"3333",@"4444",@"5555",@"6666",@"7777",@"8888",@"9999",@"1004",@"1010",@"1122",@"1212",@"1234",@"1313",@"2000",@"2001",@"4321",@"6969"];
+    if ([weakPins containsObject:pin]) {
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:@"Warning"
+                                    message:@"The PIN you have selected is not secure. Please review Pay24’s PIN Guidelines under Help for further information. Do you want to continue with this PIN?"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+
+
+        [alert addAction:[UIAlertAction actionWithTitle:@"No"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    self.stringEnteredInitially = nil;
+                                                    self.isRepeating = NO;
+                                                    [self.displayController updateHeaderLabelWithString:ACSI18NString(kACSCreateHeaderInitialText)];
+                                                }]];
+
+        [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
+                                                  style:UIAlertActionStyleDefault
+                                                handler:nil]];
+
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
 
 @end
