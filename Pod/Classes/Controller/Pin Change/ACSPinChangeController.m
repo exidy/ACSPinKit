@@ -34,11 +34,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:ACSI18NString(kACSButtonCancelTitle)
-                                                                      style:UIBarButtonItemStylePlain
-                                                                     target:self
-                                                                     action:@selector(didSelectCancelButtonItem:)];
-    self.navigationItem.leftBarButtonItem = barButtonItem;
+//    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:ACSI18NString(kACSButtonCancelTitle)
+//                                                                      style:UIBarButtonItemStylePlain
+//                                                                     target:self
+//                                                                     action:@selector(didSelectCancelButtonItem:)];
+//    self.navigationItem.leftBarButtonItem = barButtonItem;
 
     [self addChildControllers];
 
