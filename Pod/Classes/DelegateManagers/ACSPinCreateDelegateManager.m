@@ -42,7 +42,6 @@
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinCreateController:didCreatePin:)]) {
         [self.pinControllerDelegate pinCreateController:pinCreateController didCreatePin:pin];
     }
-    [pinCreateController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)pinCreateController:(ACSPinCreateController *)pinCreateController didSelectCancelButtonItem:(UIBarButtonItem *)cancelButtonItem

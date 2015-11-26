@@ -63,7 +63,6 @@
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinController:didVerifyPin:)]) {
         [self.pinControllerDelegate pinController:pinVerifyController didVerifyPin:pin];
     }
-    [pinVerifyController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)pinVerifyControllerDidEnterWrongPIN:(ACSPinVerifyController *)pinVerifyController onlyOneRetryLeft:(BOOL)onlyOneRetryLeft
@@ -82,8 +81,6 @@
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinControllerCouldNotVerifyPin:)]) {
         [self.pinControllerDelegate pinControllerCouldNotVerifyPin:pinVerifyController];
     }
-    [pinVerifyController dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 - (void)pinVerifyControllerCouldNotVerifyTouchID:(ACSPinVerifyController *)pinVerifyController withError:(NSError *)error

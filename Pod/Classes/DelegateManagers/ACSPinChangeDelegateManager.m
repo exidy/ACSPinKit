@@ -61,8 +61,6 @@
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinChangeController:didChangePin:)]) {
         [self.pinControllerDelegate pinChangeController:pinChangeController didChangePin:pin];
     }
-
-    [pinChangeController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)pinChangeController:(ACSPinChangeController *)pinChangeController didVerifyOldPIN:(NSString *)pin
@@ -76,7 +74,6 @@
     if ([self.pinControllerDelegate respondsToSelector:@selector(pinControllerCouldNotVerifyPin:)]) {
         [self.pinControllerDelegate pinControllerCouldNotVerifyPin:pinChangeController];
     }
-    [pinChangeController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)pinChangeControllerDidEnterWrongOldPIN:(ACSPinChangeController *)pinChangeController onlyOneRetryLeft:(BOOL)onlyOneRetryLeft
