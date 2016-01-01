@@ -38,7 +38,7 @@
 
 "acspinkit.create.header.initial.text" = "Please select a PIN for Pay24. This PIN will be used to protect your payment information stored within the application.";
 "acspinkit.create.header.repeat.text" = "Repeat PIN:";
-"acspinkit.create.alert.text" = "PIN don't match. Try again!";
+"acspinkit.create.alert.text" = "PINs don’t match.  Please try again.";
 
 "acspinkit.touchid.reason.text" = "Authentication needed.";
 "acspinkit.touchid.button.fallback.title" = "Enter PIN";
